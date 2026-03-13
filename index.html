@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Leading Standard — Governance, Integrity & Leadership in International Sport</title>
+<meta name="description" content="The Leading Standard advises leaders in international sport on governance, integrity and institutional reform.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1D33;
+    --navy-deep: #071526;
+    --navy-light: #132B4A;
+    --slate: #5A6978;
+    --slate-light: #8A95A1;
+    --warm-white: #F8F6F1;
+    --warm-white-dim: #F0EDE6;
+    --gold: #B8955A;
+    --gold-muted: #A6854F;
+    --gold-light: rgba(184, 149, 90, 0.12);
+    --text-dark: #1A1A1A;
+    --text-body: #3A3A3A;
+    --border-subtle: rgba(11, 29, 51, 0.08);
+    --serif: 'Cormorant Garamond', 'Georgia', serif;
+    --serif-body: 'Libre Baskerville', 'Georgia', serif;
+    --sans: 'DM Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--serif-body);
+    background: var(--warm-white);
+    color: var(--text-body);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--gold-light);
+    color: var(--navy);
+  }
+
+  /* ─── NAV ─── */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 0 clamp(2rem, 5vw, 6rem);
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(248, 246, 241, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-subtle);
+    transition: all 0.4s ease;
+  }
+
+  .nav.scrolled {
+    box-shadow: 0 1px 12px rgba(11, 29, 51, 0.06);
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--navy);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--slate);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover { color: var(--navy); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 28px;
+    height: 20px;
+    position: relative;
+    z-index: 110;
+  }
+
+  .nav-hamburger span {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: var(--navy);
+    position: absolute;
+    left: 0;
+    transition: all 0.3s ease;
+  }
+
+  .nav-hamburger span:nth-child(1) { top: 0; }
+  .nav-hamburger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+  .nav-hamburger span:nth-child(3) { bottom: 0; }
+
+  .nav-hamburger.active span:nth-child(1) { top: 50%; transform: translateY(-50%) rotate(45deg); }
+  .nav-hamburger.active span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.active span:nth-child(3) { bottom: 50%; transform: translateY(50%) rotate(-45deg); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+    padding: 6rem 2rem;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: 80%;
+    height: 140%;
+    background: radial-gradient(ellipse, rgba(184, 149, 90, 0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(184, 149, 90, 0.2), transparent);
+  }
+
+  .hero-inner {
+    max-width: 820px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.3s ease forwards;
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+    line-height: 1.15;
+    color: var(--warm-white);
+    letter-spacing: 0.01em;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.5s ease forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 300;
+  }
+
+  .hero-subtitle {
+    font-family: var(--serif-body);
+    font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+    line-height: 1.85;
+    color: var(--slate-light);
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0;
+    animation: fadeUp 1s 0.7s ease forwards;
+  }
+
+  .hero-rule {
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+    margin: 2.5rem auto 0;
+    opacity: 0;
+    animation: fadeUp 1s 0.9s ease forwards;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(248, 246, 241, 0.3);
+    text-decoration: none;
+    opacity: 0;
+    animation: fadeUp 1s 1.2s ease forwards;
+  }
+
+  .hero-scroll::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(to bottom, rgba(184, 149, 90, 0.4), transparent);
+    margin: 0.75rem auto 0;
+    animation: scrollPulse 2s ease infinite;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* ─── SECTIONS ─── */
+  .section {
+    padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 5vw, 6rem);
+  }
+
+  .section-inner {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: var(--sans);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .section-heading {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    line-height: 1.2;
+    color: var(--navy);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .section-text {
+    font-size: 0.98rem;
+    line-height: 1.85;
+    color: var(--text-body);
+    max-width: 640px;
+  }
+
+  .section-text + .section-text {
+    margin-top: 1.2rem;
+  }
+
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border-subtle);
+    margin: 0;
+  }
+
+  /* ─── ABOUT ─── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 3rem;
+    align-items: start;
+  }
+
+  .about-qualities {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+    padding-top: 0.5rem;
+  }
+
+  .quality {
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--gold);
+  }
+
+  .quality-title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--navy);
+    margin-bottom: 0.3rem;
+  }
+
+  .quality-text {
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: var(--slate);
+  }
+
+  /* ─── AREAS ─── */
+  .areas-section {
+    background: var(--navy);
+    color: var(--warm-white);
+  }
+
+  .areas-section .section-heading {
+    color: var(--warm-white);
+  }
+
+  .areas-section .section-text {
+    color: var(--slate-light);
+  }
+
+  .areas-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    margin-top: 3.5rem;
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .area-card {
+    padding: 2.5rem;
+    background: var(--navy);
+    transition: background 0.4s ease;
+    position: relative;
+  }
+
+  .area-card:hover {
+    background: var(--navy-light);
+  }
+
+  .area-number {
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+    font-weight: 300;
+  }
+
+  .area-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.35rem;
+    color: var(--warm-white);
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+  }
+
+  .area-desc {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: var(--slate-light);
+  }
+
+  .area-examples {
+    margin-top: 1.2rem;
+    font-family: var(--sans);
+    font-size: 0.76rem;
+    color: rgba(248, 246, 241, 0.35);
+    letter-spacing: 0.02em;
+    line-height: 1.8;
+  }
+
+  /* ─── PLATFORM ─── */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    margin-top: 3.5rem;
+  }
+
+  .pillar {
+    padding: 2.5rem 2rem;
+    border: 1px solid var(--border-subtle);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .pillar:hover {
+    border-color: rgba(184, 149, 90, 0.25);
+    box-shadow: 0 4px 24px rgba(11, 29, 51, 0.04);
+  }
+
+  .pillar-number {
+    font-family: var(--serif);
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    line-height: 1;
+  }
+
+  .pillar-title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: var(--navy);
+    margin-bottom: 0.8rem;
+  }
+
+  .pillar-text {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: var(--slate);
+  }
+
+  /* ─── FOUNDER ─── */
+  .founder-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 4rem;
+    margin-top: 3rem;
+    align-items: start;
+  }
+
+  .founder-portrait {
+    width: 100%;
+    aspect-ratio: 3/4;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .founder-portrait::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(184, 149, 90, 0.1);
+  }
+
+  .founder-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
+    display: block;
+    filter: grayscale(100%);
+  }
+
+  .founder-name {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.7rem;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+
+  .founder-tagline {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .founder-bio {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--text-body);
+  }
+
+  .founder-bio + .founder-bio { margin-top: 1rem; }
+
+  .founder-roles {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .founder-role {
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    color: var(--slate);
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .founder-role::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 4px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  /* ─── CONTACT ─── */
+  .contact-section {
+    background: var(--navy);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-section::before {
+    content: '';
+    position: absolute;
+    top: -60%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 160%;
+    background: radial-gradient(ellipse, rgba(184, 149, 90, 0.03) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .contact-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .contact-section .section-heading {
+    color: var(--warm-white);
+  }
+
+  .contact-text {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--slate-light);
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-link {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    padding: 1rem 2.5rem;
+    border: 1px solid rgba(184, 149, 90, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .contact-link:hover {
+    background: rgba(184, 149, 90, 0.08);
+    border-color: var(--gold);
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    background: var(--navy-deep);
+    padding: 2.5rem clamp(2rem, 5vw, 6rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .footer-logo {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(248, 246, 241, 0.3);
+  }
+
+  .footer-copy {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    color: rgba(248, 246, 241, 0.2);
+    letter-spacing: 0.03em;
+  }
+
+
+
+  /* ─── MOBILE ─── */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--warm-white);
+    z-index: 105;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .mobile-menu.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .mobile-menu a {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--navy);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+  }
+
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .nav-hamburger { display: block; }
+    .mobile-menu { display: flex; }
+
+    .about-grid,
+    .founder-layout {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .pillars {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .areas-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .founder-portrait {
+      max-width: 240px;
+    }
+
+    .footer {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .hero-title { font-size: 2rem; }
+    .section { padding: 4rem 1.5rem; }
+    .area-card { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">The Leading Standard</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#platform">Platform</a></li>
+    <li><a href="#areas">Areas of Work</a></li>
+    <li><a href="#founder">Founder</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#platform" onclick="closeMobile()">Platform</a>
+  <a href="#areas" onclick="closeMobile()">Areas of Work</a>
+  <a href="#founder" onclick="closeMobile()">Founder</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Governance · Integrity · Leadership</p>
+    <h1 class="hero-title">
+      Independent counsel for<br><em>leaders in international sport</em>
+    </h1>
+    <p class="hero-subtitle">
+      The Leading Standard advises leaders and organisations in international sport on governance, integrity and institutional reform — while contributing to the development of stronger standards across the global sporting system.
+    </p>
+    <div class="hero-rule"></div>
+  </div>
+  <a href="#about" class="hero-scroll">Discover</a>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section class="section" id="about">
+  <div class="section-inner">
+    <div >
+      <p class="section-label">About</p>
+      <h2 class="section-heading">An advisory practice and<br>intellectual platform</h2>
+      <p class="section-text">
+        The Leading Standard is an independent platform dedicated to leadership, governance, and integrity in international sport. Rather than functioning as a traditional consulting firm, it operates as a trusted advisor and intellectual platform — engaging selectively with organisations facing complex governance challenges or pursuing institutional reform.
+      </p>
+    </div>
+    <div class="about-grid">
+      <div class="section-text">
+        <p>The platform combines senior advisory work with thought leadership and strategic reform initiatives. This hybrid model allows it to address the needs of individual organisations while also contributing to systemic improvements in governance standards across international sport.</p>
+        <p class="section-text" style="margin-top:1.2rem">Mandates are undertaken selectively to ensure senior-level involvement and genuine independence.</p>
+      </div>
+      <div class="about-qualities">
+        <div class="quality">
+          <p class="quality-title">Leadership Perspective</p>
+          <p class="quality-text">Advice informed by experience at the highest levels of international sport governance.</p>
+        </div>
+        <div class="quality">
+          <p class="quality-title">Independence</p>
+          <p class="quality-text">Operating independently from institutional interests and commercial consulting structures.</p>
+        </div>
+        <div class="quality">
+          <p class="quality-title">Institutional Understanding</p>
+          <p class="quality-text">Deep familiarity with governance structures, political dynamics and accountability mechanisms.</p>
+        </div>
+        <div class="quality">
+          <p class="quality-title">Commitment to Standards</p>
+          <p class="quality-text">Contributing to strengthening governance and integrity standards across sport.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ PLATFORM ═══ -->
+<section class="section" id="platform">
+  <div class="section-inner">
+    <div >
+      <p class="section-label">The Hybrid Model</p>
+      <h2 class="section-heading">Three complementary pillars</h2>
+      <p class="section-text">The Leading Standard combines advisory work, intellectual contribution and strategic initiatives to address governance challenges at both the organisational and systemic level.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <p class="pillar-number">I</p>
+        <p class="pillar-title">Senior Advisory Practice</p>
+        <p class="pillar-text">Independent strategic advice to leaders and organisations in international sport — from governance reviews and institutional reform to crisis advisory and safeguarding architecture. Engagements are selective and confidential.</p>
+      </div>
+      <div class="pillar">
+        <p class="pillar-number">II</p>
+        <p class="pillar-title">Thought Leadership</p>
+        <p class="pillar-text">Analysis and publications on institutional challenges in international sport — governance reform, safeguarding frameworks, the independence of ethics systems, and the foundations of institutional legitimacy and stakeholder trust.</p>
+      </div>
+      <div class="pillar">
+        <p class="pillar-number">III</p>
+        <p class="pillar-title">Strategic Reform Initiatives</p>
+        <p class="pillar-text">Collaborative projects aimed at strengthening governance and integrity systems across sport — from benchmarking initiatives and safeguarding frameworks to governance dialogue forums.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ AREAS OF WORK ═══ -->
+<section class="section areas-section" id="areas">
+  <div class="section-inner">
+    <div >
+      <p class="section-label">Areas of Work</p>
+      <h2 class="section-heading">Four principal domains</h2>
+      <p class="section-text">The platform's work spans the critical dimensions of institutional governance in international sport.</p>
+    </div>
+    <div class="areas-grid">
+      <div class="area-card">
+        <p class="area-number">01</p>
+        <h3 class="area-title">Governance &<br>Leadership</h3>
+        <p class="area-desc">Advising sports organisations on institutional governance frameworks, leadership responsibilities and structural reform.</p>
+        <p class="area-examples">Governance reviews · Board advisory · Institutional restructuring · Leadership transitions · Crisis governance</p>
+      </div>
+      <div class="area-card">
+        <p class="area-number">02</p>
+        <h3 class="area-title">Integrity &<br>Ethics</h3>
+        <p class="area-desc">Supporting organisations in strengthening ethics and accountability systems that meet the demands of modern governance.</p>
+        <p class="area-examples">Ethics frameworks · Whistleblowing mechanisms · Integrity structures · Disciplinary system design</p>
+      </div>
+      <div class="area-card">
+        <p class="area-number">03</p>
+        <h3 class="area-title">Safeguarding &<br>Athlete Protection</h3>
+        <p class="area-desc">Supporting organisations in developing credible safeguarding frameworks that protect athletes and uphold institutional responsibility.</p>
+        <p class="area-examples">Safeguarding governance · Independent reporting · Trauma-informed investigations · Athlete protection policies</p>
+      </div>
+      <div class="area-card">
+        <p class="area-number">04</p>
+        <h3 class="area-title">Conflict &<br>Accountability</h3>
+        <p class="area-desc">Providing strategic insight on disputes and accountability mechanisms in international sport.</p>
+        <p class="area-examples">Disciplinary processes · Governance disputes · Crisis management · Arbitration strategy</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOUNDER ═══ -->
+<section class="section" id="founder">
+  <div class="section-inner">
+    <div >
+      <p class="section-label">Founder</p>
+      <h2 class="section-heading">Alex McLin</h2>
+    </div>
+    <div class="founder-layout">
+      <div class="founder-portrait">
+        <img src="headshot_bw.jpeg" alt="Alex McLin" class="founder-img">
+      </div>
+      <div>
+        <p class="founder-tagline">International Sports Lawyer · Arbitrator · Governance Expert</p>
+        <p class="founder-bio">
+          Alex McLin is an international sports lawyer, arbitrator and governance expert with extensive experience in sports governance, integrity systems and dispute resolution. The Leading Standard draws on this experience to provide independent advice grounded in institutional understanding.
+        </p>
+        <div class="founder-roles">
+          <p class="founder-role">Arbitrator at the Court of Arbitration for Sport</p>
+          <p class="founder-role">Director of the Gymnastics Ethics Foundation</p>
+          <p class="founder-role">Governance and integrity advisor to sports organisations</p>
+          <p class="founder-role">Former chief executive of an international sports federation</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ CONTACT ═══ -->
+<section class="section contact-section" id="contact">
+  <div class="contact-inner">
+    <div >
+      <p class="section-label">Contact</p>
+      <h2 class="section-heading">Begin a conversation</h2>
+      <p class="contact-text">
+        The Leading Standard engages selectively with organisations and leaders navigating complex governance challenges. Enquiries are treated with discretion.
+      </p>
+      <a href="/cdn-cgi/l/email-protection#066569687267657246726e636a6367626f686175726768626774622865696b" class="contact-link">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <span class="footer-logo">The Leading Standard</span>
+  <span class="footer-copy">&copy; 2026 The Leading Standard. All rights reserved.</span>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ─── Nav scroll state ───
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // ─── Mobile menu ───
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+
+  function closeMob
