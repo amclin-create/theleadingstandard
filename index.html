@@ -45,6 +45,10 @@
     overflow-x: hidden;
   }
 
+  body.menu-open {
+    overflow: hidden;
+  }
+
   ::selection {
     background: var(--gold-light);
     color: var(--navy);
@@ -116,6 +120,7 @@
   .nav-links a:hover { color: var(--navy); }
   .nav-links a:hover::after { width: 100%; }
 
+  /* ─── HAMBURGER ─── */
   .nav-hamburger {
     display: none;
     background: none;
@@ -124,34 +129,80 @@
     width: 44px;
     height: 44px;
     position: relative;
-    z-index: 110;
+    z-index: 200;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
-    padding: 12px 8px;
+    padding: 0;
   }
 
-  .nav-hamburger span {
+  .hamburger-lines {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 16px;
+    pointer-events: none;
+  }
+
+  .hamburger-lines span {
     display: block;
     width: 100%;
     height: 1.5px;
     background: var(--navy);
     position: absolute;
-    left: 8px;
-    right: 8px;
-    width: calc(100% - 16px);
+    left: 0;
     transition: all 0.3s ease;
   }
 
-  .nav-hamburger span:nth-child(1) { top: 12px; }
-  .nav-hamburger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
-  .nav-hamburger span:nth-child(3) { bottom: 12px; }
+  .hamburger-lines span:nth-child(1) { top: 0; }
+  .hamburger-lines span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+  .hamburger-lines span:nth-child(3) { bottom: 0; }
 
-  .nav-hamburger.active span:nth-child(1) { top: 50%; transform: translateY(-50%) rotate(45deg); }
-  .nav-hamburger.active span:nth-child(2) { opacity: 0; }
-  .nav-hamburger.active span:nth-child(3) { bottom: 50%; transform: translateY(50%) rotate(-45deg); }
+  .nav-hamburger.active .hamburger-lines span:nth-child(1) {
+    top: 50%; transform: translateY(-50%) rotate(45deg);
+  }
+  .nav-hamburger.active .hamburger-lines span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-hamburger.active .hamburger-lines span:nth-child(3) {
+    bottom: 50%; transform: translateY(50%) rotate(-45deg);
+  }
 
-  .nav-hamburger.active span {
-    background: var(--navy);
+  /* ─── MOBILE MENU ─── */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--warm-white);
+    z-index: 150;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .mobile-menu.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobile-menu a {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--navy);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    padding: 0.75rem 1.5rem;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
 
   /* ─── HERO ─── */
@@ -634,40 +685,7 @@
     letter-spacing: 0.03em;
   }
 
-
-
-  /* ─── MOBILE ─── */
-  .mobile-menu {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: var(--warm-white);
-    z-index: 105;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-  }
-
-  .mobile-menu.open {
-    opacity: 1;
-    pointer-events: all;
-  }
-
-  .mobile-menu a {
-    font-family: var(--serif);
-    font-size: 1.6rem;
-    font-weight: 400;
-    color: var(--navy);
-    text-decoration: none;
-    letter-spacing: 0.03em;
-    padding: 0.5rem 1rem;
-    -webkit-tap-highlight-color: transparent;
-  }
-
+  /* ─── RESPONSIVE ─── */
   @media (max-width: 900px) {
     .nav-links { display: none; }
     .nav-hamburger { display: block; }
@@ -718,17 +736,19 @@
     <li><a href="#founder">Founder</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu" type="button">
+    <div class="hamburger-lines">
+      <span></span><span></span><span></span>
+    </div>
   </button>
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#about" onclick="closeMobile()">About</a>
-  <a href="#platform" onclick="closeMobile()">Platform</a>
-  <a href="#areas" onclick="closeMobile()">Areas of Work</a>
-  <a href="#founder" onclick="closeMobile()">Founder</a>
-  <a href="#contact" onclick="closeMobile()">Contact</a>
+  <a href="#about">About</a>
+  <a href="#platform">Platform</a>
+  <a href="#areas">Areas of Work</a>
+  <a href="#founder">Founder</a>
+  <a href="#contact">Contact</a>
 </div>
 
 <!-- ═══ HERO ═══ -->
@@ -749,7 +769,7 @@
 <!-- ═══ ABOUT ═══ -->
 <section class="section" id="about">
   <div class="section-inner">
-    <div >
+    <div>
       <p class="section-label">About</p>
       <h2 class="section-heading">An advisory practice and<br>intellectual platform</h2>
       <p class="section-text">
@@ -788,7 +808,7 @@
 <!-- ═══ PLATFORM ═══ -->
 <section class="section" id="platform">
   <div class="section-inner">
-    <div >
+    <div>
       <p class="section-label">The Hybrid Model</p>
       <h2 class="section-heading">Three complementary pillars</h2>
       <p class="section-text">The Leading Standard combines advisory work, intellectual contribution and strategic initiatives to address governance challenges at both the organisational and systemic level.</p>
@@ -816,7 +836,7 @@
 <!-- ═══ AREAS OF WORK ═══ -->
 <section class="section areas-section" id="areas">
   <div class="section-inner">
-    <div >
+    <div>
       <p class="section-label">Areas of Work</p>
       <h2 class="section-heading">Four principal domains</h2>
       <p class="section-text">The platform's work spans the critical dimensions of institutional governance in international sport.</p>
@@ -853,7 +873,7 @@
 <!-- ═══ FOUNDER ═══ -->
 <section class="section" id="founder">
   <div class="section-inner">
-    <div >
+    <div>
       <p class="section-label">Founder</p>
       <h2 class="section-heading">Alex McLin</h2>
     </div>
@@ -882,7 +902,7 @@
 <!-- ═══ CONTACT ═══ -->
 <section class="section contact-section" id="contact">
   <div class="contact-inner">
-    <div >
+    <div>
       <p class="section-label">Contact</p>
       <h2 class="section-heading">Begin a conversation</h2>
       <p class="contact-text">
@@ -901,18 +921,57 @@
 
 <script>
   // ─── Nav scroll state ───
-  window.addEventListener('scroll', () => {
+  window.addEventListener('scroll', function() {
     document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
   });
 
   // ─── Mobile menu ───
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
+  (function() {
+    var hamburger = document.getElementById('hamburger');
+    var mobileMenu = document.getElementById('mobileMenu');
+    var menuLinks = mobileMenu.querySelectorAll('a');
+    var isOpen = false;
 
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    mobileMenu.classList.toggle('open');
-    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
-  });
+    function toggleMenu() {
+      isOpen = !isOpen;
+      if (isOpen) {
+        hamburger.classList.add('active');
+        mobileMenu.classList.add('open');
+        document.body.classList.add('menu-open');
+      } else {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('open');
+        document.body.classList.remove('menu-open');
+      }
+    }
 
-  function closeMob
+    function closeMenu() {
+      isOpen = false;
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('open');
+      document.body.classList.remove('menu-open');
+    }
+
+    // Use touchstart with passive: false so we can preventDefault
+    hamburger.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+      toggleMenu();
+    }, { passive: false });
+
+    // Click for desktop / narrow browser windows
+    hamburger.addEventListener('click', function(e) {
+      e.preventDefault();
+      toggleMenu();
+    });
+
+    for (var i = 0; i < menuLinks.length; i++) {
+      menuLinks[i].addEventListener('click', closeMenu);
+      menuLinks[i].addEventListener('touchstart', function() {
+        closeMenu();
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
