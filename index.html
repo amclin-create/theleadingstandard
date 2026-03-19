@@ -121,10 +121,13 @@
     background: none;
     border: none;
     cursor: pointer;
-    width: 28px;
-    height: 20px;
+    width: 44px;
+    height: 44px;
     position: relative;
     z-index: 110;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    padding: 12px 8px;
   }
 
   .nav-hamburger span {
@@ -133,17 +136,23 @@
     height: 1.5px;
     background: var(--navy);
     position: absolute;
-    left: 0;
+    left: 8px;
+    right: 8px;
+    width: calc(100% - 16px);
     transition: all 0.3s ease;
   }
 
-  .nav-hamburger span:nth-child(1) { top: 0; }
+  .nav-hamburger span:nth-child(1) { top: 12px; }
   .nav-hamburger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
-  .nav-hamburger span:nth-child(3) { bottom: 0; }
+  .nav-hamburger span:nth-child(3) { bottom: 12px; }
 
   .nav-hamburger.active span:nth-child(1) { top: 50%; transform: translateY(-50%) rotate(45deg); }
   .nav-hamburger.active span:nth-child(2) { opacity: 0; }
   .nav-hamburger.active span:nth-child(3) { bottom: 50%; transform: translateY(50%) rotate(-45deg); }
+
+  .nav-hamburger.active span {
+    background: var(--navy);
+  }
 
   /* ─── HERO ─── */
   .hero {
@@ -655,6 +664,8 @@
     color: var(--navy);
     text-decoration: none;
     letter-spacing: 0.03em;
+    padding: 0.5rem 1rem;
+    -webkit-tap-highlight-color: transparent;
   }
 
   @media (max-width: 900px) {
@@ -877,7 +888,7 @@
       <p class="contact-text">
         The Leading Standard engages selectively with organisations and leaders navigating complex governance challenges. Enquiries are treated with discretion.
       </p>
-      <a href="/cdn-cgi/l/email-protection#066569687267657246726e636a6367626f686175726768626774622865696b" class="contact-link">Get in Touch</a>
+      <a href="mailto:aml@mclinarbitration.com" class="contact-link">Get in Touch</a>
     </div>
   </div>
 </section>
@@ -888,7 +899,7 @@
   <span class="footer-copy">&copy; 2026 The Leading Standard. All rights reserved.</span>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   // ─── Nav scroll state ───
   window.addEventListener('scroll', () => {
     document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
